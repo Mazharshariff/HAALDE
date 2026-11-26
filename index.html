@@ -1,0 +1,2907 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover" />
+    <title>💖 Ameena & Shoaib — My Forever Love</title>
+
+    <!-- Google Fonts for romantic typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Dancing+Script:wght@600;700&family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400;1,600&display=swap"
+        rel="stylesheet" />
+
+    <style>
+        /* ========================================================
+       1. ROOT THEME & RESET
+       ======================================================== */
+        :root {
+            --primary: #ff4d8d;
+            --primary-glow: rgba(255, 77, 141, 0.45);
+            --secondary: #9c27b0;
+            --secondary-glow: rgba(156, 39, 176, 0.4);
+            --gold: #ffd166;
+            --rose: #ff758f;
+            --lavender: #d8b4e2;
+            --dark-bg: #0b0714;
+            --card-bg: rgba(25, 14, 38, 0.76);
+            --card-border: rgba(255, 117, 143, 0.28);
+            --card-hover-border: rgba(255, 77, 141, 0.75);
+            --text-main: #ffffff;
+            --text-muted: #e2cce9;
+            --glass-panel: rgba(30, 16, 45, 0.85);
+            --safe-bottom: env(safe-area-inset-bottom, 0px);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            background-image:
+                radial-gradient(circle at 15% 15%, rgba(233, 30, 99, 0.18) 0%, transparent 45%),
+                radial-gradient(circle at 85% 55%, rgba(156, 39, 176, 0.2) 0%, transparent 45%),
+                radial-gradient(circle at 50% 90%, rgba(255, 107, 157, 0.14) 0%, transparent 50%);
+            color: var(--text-main);
+            font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        ::selection {
+            background: var(--primary);
+            color: #fff;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #0b0714;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(var(--primary), var(--secondary));
+            border-radius: 4px;
+        }
+
+        /* Background Stars & Aurora Canvas */
+        #starsCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Floating Hearts Container */
+        #floatingContainer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .float-item {
+            position: absolute;
+            bottom: -60px;
+            animation: floatUpAnimation linear infinite;
+            user-select: none;
+            opacity: 0.75;
+            filter: drop-shadow(0 0 6px rgba(255, 77, 141, 0.4));
+        }
+
+        @keyframes floatUpAnimation {
+            0% {
+                transform: translateY(0) rotate(0deg) scale(0.6);
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 0.85;
+            }
+
+            90% {
+                opacity: 0.7;
+            }
+
+            100% {
+                transform: translateY(-118vh) rotate(360deg) scale(1.15);
+                opacity: 0;
+            }
+        }
+
+        /* Sparkle cursor & tap trail */
+        .sparkle-trail {
+            position: fixed;
+            pointer-events: none;
+            z-index: 99999;
+            font-size: 16px;
+            animation: sparkleFade 0.75s forwards ease-out;
+            transform: translate(-50%, -50%);
+        }
+
+        @keyframes sparkleFade {
+            0% {
+                transform: translate(-50%, -50%) scale(1.2);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translate(-50%, -90%) scale(0.2);
+                opacity: 0;
+            }
+        }
+
+        /* ========================================================
+       2. MUSIC BANNER & FLOATING PLAYER (SUPER MOBILE FRIENDLY)
+       ======================================================== */
+        .music-hint-banner {
+            position: fixed;
+            top: 14px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, rgba(255, 77, 141, 0.96), rgba(156, 39, 176, 0.96));
+            color: #fff;
+            padding: 10px 22px;
+            border-radius: 40px;
+            font-size: 0.88rem;
+            font-weight: 600;
+            z-index: 9990;
+            box-shadow: 0 6px 25px rgba(255, 77, 141, 0.55);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            animation: pulseBanner 2s infinite ease-in-out;
+            transition: opacity 0.4s, transform 0.4s;
+            width: calc(100% - 32px);
+            max-width: 440px;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .music-hint-banner.hidden {
+            opacity: 0;
+            transform: translate(-50%, -40px);
+            pointer-events: none;
+        }
+
+        @keyframes pulseBanner {
+
+            0%,
+            100% {
+                transform: translateX(-50%) scale(1);
+            }
+
+            50% {
+                transform: translateX(-50%) scale(1.03);
+            }
+        }
+
+        /* Floating music widget */
+        .music-widget {
+            position: fixed;
+            bottom: calc(20px + var(--safe-bottom));
+            right: 20px;
+            z-index: 9980;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: rgba(18, 9, 30, 0.92);
+            border: 1px solid var(--primary-glow);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            padding: 9px 16px;
+            border-radius: 50px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.7), 0 0 20px var(--primary-glow);
+            transition: all 0.3s ease;
+            max-width: calc(100vw - 32px);
+        }
+
+        .music-widget:hover {
+            box-shadow: 0 10px 36px rgba(255, 77, 141, 0.45), 0 0 25px var(--primary-glow);
+        }
+
+        .disc-spin {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: radial-gradient(circle, #ff758f 25%, #9c27b0 75%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            color: #fff;
+            box-shadow: 0 0 14px rgba(255, 77, 141, 0.6);
+            animation: spinRecord 3.5s linear infinite paused;
+            cursor: pointer;
+            user-select: none;
+            flex-shrink: 0;
+        }
+
+        .disc-spin.spinning {
+            animation-play-state: running;
+        }
+
+        @keyframes spinRecord {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .track-details {
+            display: flex;
+            flex-direction: column;
+            max-width: 160px;
+            overflow: hidden;
+        }
+
+        .track-name {
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: #fff;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .track-artist {
+            font-size: 0.68rem;
+            color: var(--rose);
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .player-controls {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-audio {
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 1.25rem;
+            cursor: pointer;
+            padding: 6px;
+            transition: transform 0.2s, color 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 36px;
+            min-height: 36px;
+        }
+
+        .btn-audio:hover {
+            transform: scale(1.2);
+            color: var(--primary);
+        }
+
+        .volume-slider {
+            width: 55px;
+            height: 4px;
+            accent-color: var(--primary);
+            cursor: pointer;
+        }
+
+        .equalizer {
+            display: flex;
+            align-items: flex-end;
+            gap: 3px;
+            height: 18px;
+        }
+
+        .eq-bar {
+            width: 3px;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 2px;
+            transition: height 0.2s;
+        }
+
+        .equalizer.active .eq-bar:nth-child(1) {
+            animation: eqBounce 0.8s infinite ease-in-out;
+        }
+
+        .equalizer.active .eq-bar:nth-child(2) {
+            animation: eqBounce 1.2s infinite ease-in-out 0.2s;
+        }
+
+        .equalizer.active .eq-bar:nth-child(3) {
+            animation: eqBounce 0.9s infinite ease-in-out 0.4s;
+        }
+
+        .equalizer.active .eq-bar:nth-child(4) {
+            animation: eqBounce 1.1s infinite ease-in-out 0.1s;
+        }
+
+        @keyframes eqBounce {
+
+            0%,
+            100% {
+                height: 4px;
+            }
+
+            50% {
+                height: 18px;
+            }
+        }
+
+        /* ========================================================
+       3. MAIN LAYOUT WRAPPER
+       ======================================================== */
+        .main-wrapper {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px calc(110px + var(--safe-bottom));
+        }
+
+        /* ========================================================
+       4. HERO SECTION
+       ======================================================== */
+        .hero {
+            min-height: 85vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 50px 10px 40px;
+            position: relative;
+        }
+
+        .couple-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 77, 141, 0.15);
+            border: 1px solid var(--primary-glow);
+            padding: 6px 18px;
+            border-radius: 30px;
+            font-size: 0.82rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--rose);
+            margin-bottom: 16px;
+            backdrop-filter: blur(8px);
+        }
+
+        .crown-glow {
+            font-size: clamp(3rem, 7vw, 4.2rem);
+            animation: crownBounce 3s ease-in-out infinite;
+            filter: drop-shadow(0 0 25px rgba(255, 209, 102, 0.7));
+            margin-bottom: 8px;
+        }
+
+        @keyframes crownBounce {
+
+            0%,
+            100% {
+                transform: translateY(0) rotate(-4deg);
+            }
+
+            50% {
+                transform: translateY(-14px) rotate(4deg);
+            }
+        }
+
+        .hero-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: clamp(2.8rem, 8.5vw, 6.2rem);
+            font-weight: 700;
+            color: #ff6b9d;
+            background: linear-gradient(135deg, #ff758f 0%, #ffd166 45%, #e0aaff 75%, #ff758f 100%);
+            background-size: 250% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shimmerText 5s linear infinite;
+            line-height: 1.15;
+            margin-bottom: 14px;
+            filter: drop-shadow(0 0 35px rgba(255, 77, 141, 0.35));
+        }
+
+        @keyframes shimmerText {
+            to {
+                background-position: 250% center;
+            }
+        }
+
+        .hero-subtitle {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: clamp(1.05rem, 2.5vw, 1.45rem);
+            color: var(--text-muted);
+            max-width: 680px;
+            margin: 0 auto 24px;
+            padding: 0 10px;
+        }
+
+        /* Dynamic typing love text */
+        .typing-box {
+            min-height: 2.6em;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .typing-text {
+            font-family: 'Caveat', cursive;
+            font-size: clamp(1.25rem, 3.5vw, 2.1rem);
+            color: var(--gold);
+            text-shadow: 0 0 16px rgba(255, 209, 102, 0.4);
+        }
+
+        .typing-cursor {
+            display: inline-block;
+            color: var(--primary);
+            animation: blinkCursor 0.75s infinite;
+            font-size: 1.5rem;
+            margin-left: 2px;
+        }
+
+        @keyframes blinkCursor {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0;
+            }
+        }
+
+        /* Interactive Action Quick Buttons in Hero */
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        .btn-action-pill {
+            background: linear-gradient(135deg, rgba(255, 77, 141, 0.25), rgba(156, 39, 176, 0.25));
+            border: 1px solid var(--primary-glow);
+            color: #fff;
+            padding: 10px 22px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-action-pill:hover,
+        .btn-action-pill:active {
+            transform: translateY(-4px) scale(1.05);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            box-shadow: 0 8px 25px rgba(255, 77, 141, 0.5);
+        }
+
+        /* Nickname pills: shonuu, baby, cutu, kuchukuchu, sweetu, shoaib */
+        .nickname-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            max-width: 860px;
+            margin: 0 auto 34px;
+            padding: 0 10px;
+        }
+
+        .nick-pill {
+            background: linear-gradient(135deg, rgba(255, 77, 141, 0.16), rgba(156, 39, 176, 0.16));
+            border: 1px solid var(--card-border);
+            padding: 9px 20px;
+            border-radius: 40px;
+            font-size: 0.92rem;
+            font-weight: 600;
+            color: #fff;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+            transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            user-select: none;
+        }
+
+        .nick-pill:hover,
+        .nick-pill:active {
+            transform: translateY(-5px) scale(1.06);
+            background: linear-gradient(135deg, rgba(255, 77, 141, 0.4), rgba(156, 39, 176, 0.4));
+            border-color: var(--primary);
+            box-shadow: 0 8px 22px rgba(255, 77, 141, 0.45);
+        }
+
+        /* Relationship counter card (Since 17th November 2026) */
+        .counter-glass {
+            background: linear-gradient(135deg, rgba(35, 18, 55, 0.8), rgba(18, 10, 30, 0.9));
+            border: 1px solid var(--card-border);
+            border-radius: 26px;
+            padding: 28px 24px;
+            box-shadow: 0 15px 45px rgba(0, 0, 0, 0.55), 0 0 30px rgba(255, 77, 141, 0.15);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            max-width: 800px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        .counter-header {
+            font-size: 0.82rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--lavender);
+            margin-bottom: 18px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .counter-grid {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .counter-box {
+            text-align: center;
+            min-width: 78px;
+            padding: 10px 14px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            flex: 1 1 70px;
+            max-width: 130px;
+        }
+
+        .counter-number {
+            font-family: 'Dancing Script', cursive;
+            font-size: clamp(2rem, 5vw, 3.4rem);
+            font-weight: 700;
+            color: #ff6b9d;
+            background: linear-gradient(135deg, #ffd166, #ff758f);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1;
+            display: block;
+        }
+
+        .counter-label {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        .counter-divider {
+            font-size: 1.4rem;
+            color: var(--primary);
+            opacity: 0.7;
+        }
+
+        .counter-extra {
+            margin-top: 18px;
+            font-size: 0.88rem;
+            color: var(--rose);
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+        }
+
+        /* Scroll down indicator */
+        .scroll-arrow-box {
+            margin-top: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            opacity: 0.8;
+            cursor: pointer;
+            transition: opacity 0.3s;
+        }
+
+        .scroll-arrow-box:hover {
+            opacity: 1;
+        }
+
+        .scroll-arrow-box span {
+            font-size: 0.7rem;
+            letter-spacing: 3px;
+            color: var(--lavender);
+        }
+
+        .chevron {
+            width: 20px;
+            height: 20px;
+            border-right: 2px solid var(--primary);
+            border-bottom: 2px solid var(--primary);
+            transform: rotate(45deg);
+            animation: chevronBounce 1.8s infinite;
+        }
+
+        @keyframes chevronBounce {
+
+            0%,
+            100% {
+                transform: rotate(45deg) translate(0, 0);
+            }
+
+            50% {
+                transform: rotate(45deg) translate(6px, 6px);
+            }
+        }
+
+        /* ========================================================
+       5. SECTION HEADERS
+       ======================================================== */
+        .section-wrap {
+            margin-top: 80px;
+            position: relative;
+        }
+
+        .section-head {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 0 10px;
+        }
+
+        .section-subtitle {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: var(--rose);
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .section-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: clamp(2.3rem, 5.5vw, 3.6rem);
+            font-weight: 700;
+            color: #fff;
+            background: linear-gradient(135deg, #ff758f, #ffd166, #e0aaff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.2;
+        }
+
+        .section-ornament {
+            color: rgba(255, 77, 141, 0.45);
+            letter-spacing: 12px;
+            font-size: 1.2rem;
+            margin-top: 6px;
+        }
+
+        /* ========================================================
+       6. GALLERY (POLAROIDS + REAL PHOTOS)
+       ======================================================== */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr));
+            gap: 28px;
+            max-width: 1160px;
+            margin: 0 auto;
+            padding: 10px;
+        }
+
+        .polaroid-card {
+            background: #ffffff;
+            border-radius: 4px;
+            padding: 12px 12px 48px 12px;
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.65), 0 0 1px rgba(0, 0, 0, 0.2);
+            transform: rotate(var(--rotate-deg, 0deg));
+            transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            position: relative;
+            touch-action: manipulation;
+        }
+
+        .polaroid-card::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 65px;
+            height: 20px;
+            background: rgba(255, 230, 200, 0.6);
+            backdrop-filter: blur(2px);
+            border: 1px dashed rgba(255, 180, 150, 0.55);
+            border-radius: 2px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+            z-index: 2;
+        }
+
+        .polaroid-card:hover,
+        .polaroid-card:active {
+            transform: rotate(0deg) translateY(-10px) scale(1.03);
+            box-shadow: 0 20px 45px rgba(255, 77, 141, 0.4), 0 0 25px rgba(255, 77, 141, 0.3);
+            z-index: 10;
+        }
+
+        .polaroid-img-wrapper {
+            width: 100%;
+            height: 270px;
+            overflow: hidden;
+            border-radius: 2px;
+            background: #20152b;
+            position: relative;
+        }
+
+        .polaroid-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .polaroid-card:hover .polaroid-img-wrapper img {
+            transform: scale(1.08);
+        }
+
+        .polaroid-caption {
+            position: absolute;
+            bottom: 12px;
+            left: 12px;
+            right: 12px;
+            text-align: center;
+            font-family: 'Caveat', cursive;
+            font-size: 1.35rem;
+            color: #2b1834;
+            font-weight: 700;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .polaroid-heart {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            font-size: 1.25rem;
+            opacity: 0.85;
+            transition: transform 0.3s;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.4));
+        }
+
+        .polaroid-card:hover .polaroid-heart {
+            transform: scale(1.3);
+        }
+
+        /* Add memory button area */
+        .add-memory-box {
+            margin-top: 40px;
+            text-align: center;
+            background: linear-gradient(135deg, rgba(35, 18, 55, 0.6), rgba(20, 10, 32, 0.6));
+            border: 2px dashed rgba(255, 77, 141, 0.45);
+            border-radius: 24px;
+            padding: 30px 20px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-add-photos {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: #fff;
+            font-size: 1rem;
+            font-weight: 600;
+            padding: 13px 32px;
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(255, 77, 141, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .btn-add-photos:hover,
+        .btn-add-photos:active {
+            transform: translateY(-2px) scale(1.03);
+            box-shadow: 0 12px 35px rgba(255, 77, 141, 0.6);
+        }
+
+        .add-photos-desc {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-top: 10px;
+        }
+
+        #fileInput {
+            display: none;
+        }
+
+        /* ========================================================
+       7. LIGHTBOX (MODAL FULLSCREEN)
+       ======================================================== */
+        .lightbox-modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(8, 4, 16, 0.96);
+            z-index: 99999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .lightbox-modal.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .lightbox-img-wrap {
+            max-width: 92vw;
+            max-height: 72vh;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 0 50px rgba(255, 77, 141, 0.4);
+            border: 2px solid rgba(255, 117, 143, 0.4);
+            position: relative;
+        }
+
+        .lightbox-img-wrap img {
+            max-width: 100%;
+            max-height: 72vh;
+            object-fit: contain;
+            display: block;
+        }
+
+        .lightbox-caption {
+            margin-top: 16px;
+            font-family: 'Caveat', cursive;
+            font-size: clamp(1.4rem, 4vw, 2rem);
+            color: var(--gold);
+            text-align: center;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+            max-width: 90vw;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 24px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: var(--rose);
+            font-size: 2rem;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s;
+        }
+
+        .lightbox-close:hover {
+            transform: scale(1.15);
+            background: var(--primary);
+            color: #fff;
+        }
+
+        .lightbox-nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            color: #fff;
+            font-size: 1.8rem;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            backdrop-filter: blur(5px);
+        }
+
+        .lightbox-nav-btn:hover {
+            background: var(--primary);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .lightbox-prev {
+            left: 16px;
+        }
+
+        .lightbox-next {
+            right: 16px;
+        }
+
+        /* ========================================================
+       8. LOVE NOTES JAR (SPECIAL IDEA TO MAKE SHOAIB HAPPY!)
+       ======================================================== */
+        .jar-section {
+            max-width: 760px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, rgba(40, 20, 65, 0.82), rgba(20, 10, 35, 0.9));
+            border: 1px solid var(--primary-glow);
+            border-radius: 28px;
+            padding: 40px 28px;
+            text-align: center;
+            box-shadow: 0 15px 45px rgba(0, 0, 0, 0.6), 0 0 35px rgba(255, 77, 141, 0.2);
+            backdrop-filter: blur(16px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .jar-icon-glow {
+            font-size: 3.5rem;
+            animation: jarGlow 2.5s infinite ease-in-out;
+            margin-bottom: 12px;
+            display: inline-block;
+        }
+
+        @keyframes jarGlow {
+
+            0%,
+            100% {
+                transform: scale(1) rotate(0deg);
+                filter: drop-shadow(0 0 15px rgba(255, 209, 102, 0.5));
+            }
+
+            50% {
+                transform: scale(1.12) rotate(4deg);
+                filter: drop-shadow(0 0 30px rgba(255, 77, 141, 0.8));
+            }
+        }
+
+        .jar-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: clamp(2rem, 5vw, 3rem);
+            color: var(--gold);
+            margin-bottom: 8px;
+        }
+
+        .jar-sub {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            max-width: 540px;
+            margin: 0 auto 24px;
+        }
+
+        .jar-note-display {
+            min-height: 110px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px dashed var(--rose);
+            border-radius: 18px;
+            padding: 22px 20px;
+            margin: 0 auto 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.35s ease;
+        }
+
+        .jar-note-text {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: clamp(1.05rem, 2.5vw, 1.25rem);
+            color: #fff;
+            line-height: 1.8;
+            text-shadow: 0 0 10px rgba(255, 77, 141, 0.4);
+        }
+
+        .btn-pick-note {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, #ff4d8d, #ffd166);
+            color: #200826;
+            font-weight: 700;
+            font-size: 1rem;
+            padding: 14px 34px;
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 8px 30px rgba(255, 77, 141, 0.5);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .btn-pick-note:hover,
+        .btn-pick-note:active {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 12px 35px rgba(255, 209, 102, 0.6);
+        }
+
+        /* ========================================================
+       9. LOVE LETTER FROM AMEENA TO SHOAIB
+       ======================================================== */
+        .letter-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, rgba(35, 18, 55, 0.9), rgba(20, 10, 32, 0.96));
+            border: 1px solid var(--card-border);
+            border-radius: 28px;
+            padding: 45px 36px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), 0 0 40px rgba(255, 77, 141, 0.15);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(16px);
+        }
+
+        .letter-container::before {
+            content: '"';
+            position: absolute;
+            top: -30px;
+            left: 15px;
+            font-size: 14rem;
+            font-family: 'Playfair Display', serif;
+            color: rgba(255, 77, 141, 0.05);
+            line-height: 1;
+            pointer-events: none;
+        }
+
+        .letter-seal {
+            position: absolute;
+            top: 24px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #e91e63, #9c27b0);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 18px rgba(233, 30, 99, 0.5);
+        }
+
+        .letter-salutation {
+            font-family: 'Dancing Script', cursive;
+            font-size: clamp(2rem, 4.5vw, 2.7rem);
+            color: var(--gold);
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .letter-para {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1rem, 2vw, 1.15rem);
+            line-height: 2.1;
+            color: #f7e6fb;
+            margin-bottom: 22px;
+            font-style: italic;
+        }
+
+        .letter-para strong {
+            color: var(--gold);
+            font-style: normal;
+        }
+
+        .letter-para .tag {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .letter-signature {
+            text-align: right;
+            font-family: 'Dancing Script', cursive;
+            font-size: clamp(2rem, 4.5vw, 2.6rem);
+            color: var(--gold);
+            margin-top: 35px;
+            text-shadow: 0 0 15px rgba(255, 209, 102, 0.4);
+        }
+
+        /* ========================================================
+       10. NICKNAMES SPOTLIGHT (SHONUU, BABY, CUTU, KUCHUKUCHU, SWEETU, SHOAIB)
+       ======================================================== */
+        .nicknames-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
+            gap: 24px;
+            max-width: 1140px;
+            margin: 0 auto;
+            padding: 0 10px;
+        }
+
+        .nick-card {
+            background: linear-gradient(135deg, rgba(35, 18, 55, 0.75), rgba(20, 10, 32, 0.85));
+            border: 1px solid var(--card-border);
+            border-radius: 24px;
+            padding: 26px;
+            display: flex;
+            gap: 18px;
+            align-items: flex-start;
+            backdrop-filter: blur(12px);
+            transition: all 0.35s ease;
+            cursor: pointer;
+        }
+
+        .nick-card:hover,
+        .nick-card:active {
+            transform: translateY(-6px) scale(1.02);
+            border-color: var(--primary);
+            box-shadow: 0 12px 35px rgba(255, 77, 141, 0.3);
+        }
+
+        .nick-card-emoji {
+            font-size: 2.8rem;
+            flex-shrink: 0;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 18px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .nick-card-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            color: var(--gold);
+            margin-bottom: 6px;
+        }
+
+        .nick-card-text {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* ========================================================
+       11. REASONS WHY AMEENA LOVES SHOAIB
+       ======================================================== */
+        .reasons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr));
+            gap: 22px;
+            max-width: 1160px;
+            margin: 0 auto;
+            padding: 0 10px;
+        }
+
+        .reason-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 22px;
+            padding: 26px 22px;
+            backdrop-filter: blur(12px);
+            transition: all 0.35s ease;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .reason-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--gold));
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .reason-card:hover,
+        .reason-card:active {
+            transform: translateY(-6px);
+            border-color: var(--card-hover-border);
+            box-shadow: 0 12px 35px rgba(255, 77, 141, 0.25);
+        }
+
+        .reason-card:hover::before {
+            opacity: 1;
+        }
+
+        .reason-icon {
+            font-size: 2.4rem;
+            margin-bottom: 12px;
+        }
+
+        .reason-num {
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--rose);
+            margin-bottom: 4px;
+        }
+
+        .reason-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 8px;
+        }
+
+        .reason-desc {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* ========================================================
+       12. LOVE METER SECTION
+       ======================================================== */
+        .meter-box {
+            max-width: 680px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 26px;
+            padding: 36px 30px;
+            backdrop-filter: blur(14px);
+        }
+
+        .meter-row {
+            margin-bottom: 24px;
+        }
+
+        .meter-row:last-child {
+            margin-bottom: 0;
+        }
+
+        .meter-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            gap: 10px;
+        }
+
+        .meter-info-label {
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-align: left;
+        }
+
+        .meter-info-val {
+            color: var(--gold);
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.25rem;
+            white-space: nowrap;
+        }
+
+        .meter-bar-track {
+            width: 100%;
+            height: 10px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 99px;
+            overflow: hidden;
+        }
+
+        .meter-bar-fill {
+            height: 100%;
+            border-radius: 99px;
+            background: linear-gradient(90deg, #ff4d8d, #ffd166);
+            box-shadow: 0 0 12px rgba(255, 77, 141, 0.7);
+            transition: width 1.5s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        /* ========================================================
+       13. AMEENA'S SACRED PROMISES TO SHOAIB
+       ======================================================== */
+        .promises-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(min(100%, 290px), 1fr));
+            gap: 20px;
+            max-width: 1120px;
+            margin: 0 auto;
+            padding: 0 10px;
+        }
+
+        .promise-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 20px;
+            padding: 22px 20px;
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            transition: all 0.3s;
+        }
+
+        .promise-card:hover,
+        .promise-card:active {
+            transform: translateX(6px);
+            border-color: var(--primary);
+            background: rgba(45, 22, 68, 0.85);
+            box-shadow: 0 10px 28px rgba(0, 0, 0, 0.4);
+        }
+
+        .promise-icon {
+            font-size: 1.8rem;
+            flex-shrink: 0;
+        }
+
+        .promise-text {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 0.98rem;
+            color: #f7e6fb;
+            line-height: 1.65;
+        }
+
+        /* ========================================================
+       14. TIMELINE SECTION (SINCE 17TH NOVEMBER 2026)
+       ======================================================== */
+        .timeline {
+            position: relative;
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 0 10px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, transparent, var(--primary), var(--secondary), transparent);
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            display: flex;
+            justify-content: flex-end;
+            padding-right: calc(50% + 28px);
+            margin-bottom: 44px;
+            position: relative;
+        }
+
+        .timeline-item:nth-child(even) {
+            justify-content: flex-start;
+            padding-right: 0;
+            padding-left: calc(50% + 28px);
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 50%;
+            top: 18px;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            transform: translateX(-50%);
+            box-shadow: 0 0 0 5px rgba(255, 77, 141, 0.25), 0 0 20px var(--primary);
+            transition: transform 0.3s;
+        }
+
+        .timeline-item:hover .timeline-dot {
+            transform: translateX(-50%) scale(1.35);
+        }
+
+        .timeline-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 20px;
+            padding: 22px 24px;
+            max-width: 330px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s;
+        }
+
+        .timeline-item:hover .timeline-card {
+            transform: translateY(-4px) scale(1.02);
+            border-color: var(--primary);
+            box-shadow: 0 10px 30px rgba(255, 77, 141, 0.25);
+        }
+
+        .timeline-date {
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--rose);
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .timeline-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 6px;
+        }
+
+        .timeline-desc {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* ========================================================
+       15. SURPRISE REVEAL SECTION
+       ======================================================== */
+        .surprise-section {
+            text-align: center;
+            margin-top: 90px;
+            padding: 0 10px;
+        }
+
+        .btn-surprise {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            background: linear-gradient(135deg, #ff4d8d, #9c27b0);
+            color: #fff;
+            font-family: 'Dancing Script', cursive;
+            font-size: clamp(1.6rem, 4vw, 2.2rem);
+            padding: 16px 44px;
+            border-radius: 60px;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 12px 40px rgba(255, 77, 141, 0.5), 0 0 30px rgba(156, 39, 176, 0.4);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            max-width: 100%;
+        }
+
+        .btn-surprise::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -60%;
+            width: 50%;
+            height: 200%;
+            background: rgba(255, 255, 255, 0.25);
+            transform: skewX(-25deg);
+            transition: left 0.75s ease;
+        }
+
+        .btn-surprise:hover::before {
+            left: 140%;
+        }
+
+        .btn-surprise:hover,
+        .btn-surprise:active {
+            transform: scale(1.05) translateY(-3px);
+            box-shadow: 0 16px 50px rgba(255, 77, 141, 0.7);
+        }
+
+        /* Surprise Reveal Box */
+        .surprise-popup {
+            max-width: 720px;
+            margin: 35px auto 0;
+            background: linear-gradient(135deg, rgba(40, 20, 60, 0.95), rgba(20, 10, 35, 0.95));
+            border: 2px solid var(--primary);
+            border-radius: 28px;
+            padding: 40px 30px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7), 0 0 40px rgba(255, 77, 141, 0.4);
+            display: none;
+            animation: popOpen 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        .surprise-popup.open {
+            display: block;
+        }
+
+        @keyframes popOpen {
+            0% {
+                transform: scale(0.7);
+                opacity: 0;
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .surprise-popup-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: clamp(2rem, 5vw, 3.2rem);
+            color: var(--gold);
+            margin-bottom: 16px;
+        }
+
+        .surprise-popup-text {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: clamp(1.05rem, 2.5vw, 1.25rem);
+            line-height: 2;
+            color: #fff;
+            margin-bottom: 24px;
+        }
+
+        .surprise-emojis {
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            letter-spacing: 8px;
+        }
+
+        /* ========================================================
+       16. FOOTER
+       ======================================================== */
+        footer {
+            text-align: center;
+            margin-top: 100px;
+            padding: 50px 20px 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            position: relative;
+            z-index: 2;
+        }
+
+        .footer-heart {
+            font-size: 3.2rem;
+            display: inline-block;
+            margin-bottom: 12px;
+            animation: heartPulse 1.4s infinite ease-in-out;
+        }
+
+        @keyframes heartPulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.25);
+            }
+        }
+
+        .footer-text {
+            font-family: 'Dancing Script', cursive;
+            font-size: clamp(1.4rem, 3.5vw, 1.8rem);
+            color: var(--rose);
+            margin-bottom: 10px;
+        }
+
+        .footer-sub {
+            font-size: 0.85rem;
+            color: var(--lavender);
+            letter-spacing: 1.5px;
+        }
+
+        /* ========================================================
+       17. RESPONSIVE DESIGN & MOBILE OPTIMIZATIONS
+       ======================================================== */
+        @media (max-width: 768px) {
+            .main-wrapper {
+                padding: 20px 14px calc(115px + var(--safe-bottom));
+            }
+
+            .letter-container {
+                padding: 34px 20px;
+            }
+
+            .letter-seal {
+                top: 16px;
+                right: 18px;
+                width: 42px;
+                height: 42px;
+                font-size: 1.25rem;
+            }
+
+            /* Single-line timeline on mobile */
+            .timeline::before {
+                left: 20px;
+            }
+
+            .timeline-item,
+            .timeline-item:nth-child(even) {
+                justify-content: flex-start;
+                padding-right: 0;
+                padding-left: 50px;
+                margin-bottom: 34px;
+            }
+
+            .timeline-dot {
+                left: 20px;
+            }
+
+            .timeline-card {
+                max-width: 100%;
+                width: 100%;
+                padding: 18px 20px;
+            }
+
+            .counter-glass {
+                padding: 22px 14px;
+            }
+
+            .counter-box {
+                min-width: 60px;
+                padding: 8px 8px;
+            }
+
+            .counter-divider {
+                display: none;
+            }
+
+            .polaroid-img-wrapper {
+                height: 240px;
+            }
+
+            /* Compact mobile music widget docked gracefully */
+            .music-widget {
+                bottom: calc(14px + var(--safe-bottom));
+                right: 12px;
+                left: 12px;
+                justify-content: space-between;
+                padding: 8px 14px;
+            }
+
+            .track-details {
+                max-width: 140px;
+            }
+
+            .volume-slider {
+                display: none;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 2.8rem;
+            }
+
+            .counter-number {
+                font-size: 1.9rem;
+            }
+
+            .counter-label {
+                font-size: 0.6rem;
+            }
+
+            .nick-card {
+                padding: 18px 16px;
+            }
+
+            .nick-card-emoji {
+                font-size: 2.2rem;
+                padding: 6px;
+            }
+
+            .btn-surprise {
+                padding: 14px 26px;
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Background Canvas for Glowing Stars -->
+    <canvas id="starsCanvas"></canvas>
+
+    <!-- Floating Hearts & Sparkles Layer -->
+    <div id="floatingContainer"></div>
+
+    <!-- Music Auto-Play Helper Banner -->
+    <div class="music-hint-banner" id="musicBanner" onclick="togglePlayMusic()">
+        <span>🎵</span>
+        <span>Click anywhere to play our song: <strong>Rishte Naate</strong></span>
+        <span>💖</span>
+    </div>
+
+    <!-- Floating Music Widget (Bottom) -->
+    <div class="music-widget">
+        <div class="disc-spin" id="discRecord" onclick="togglePlayMusic()" title="Play / Pause">
+            🎵
+        </div>
+        <div class="track-details" onclick="togglePlayMusic()" style="cursor:pointer;">
+            <div class="track-name" title="Rishte Naate">Rishte Naate</div>
+            <div class="track-artist">💖 Ameena &amp; Shoaib's Song</div>
+        </div>
+        <div class="equalizer" id="equalizerWave">
+            <div class="eq-bar"></div>
+            <div class="eq-bar"></div>
+            <div class="eq-bar"></div>
+            <div class="eq-bar"></div>
+        </div>
+        <div class="player-controls">
+            <button class="btn-audio" id="btnPlayPause" onclick="togglePlayMusic()" title="Play / Pause">
+                ▶
+            </button>
+            <input type="range" class="volume-slider" id="volSlider" min="0" max="1" step="0.05" value="0.85"
+                title="Volume" />
+        </div>
+    </div>
+
+    <!-- Audio Element with multiple reliable fallback sources -->
+    <audio id="loveSong" loop preload="auto">
+        <source src="song.mp3" type="audio/mpeg" />
+        <source src="Rishte Naate.mp3" type="audio/mpeg" />
+        <source src="./Rishte%20Naate.mp3" type="audio/mpeg" />
+        <source src="Rishte Naate De Dana Dan 128 Kbps.mp3" type="audio/mpeg" />
+    </audio>
+
+    <!-- Fullscreen Lightbox Modal -->
+    <div class="lightbox-modal" id="lightboxModal">
+        <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+        <button class="lightbox-nav-btn lightbox-prev" onclick="changeLightboxPhoto(-1)">&#10094;</button>
+        <div class="lightbox-img-wrap">
+            <img id="lightboxImg" src="" alt="Memory" />
+        </div>
+        <div class="lightbox-caption" id="lightboxCaption"></div>
+        <button class="lightbox-nav-btn lightbox-next" onclick="changeLightboxPhoto(1)">&#10095;</button>
+    </div>
+
+    <!-- Main Content Wrapper -->
+    <div class="main-wrapper">
+
+        <!-- ==========================================
+         1. HERO SECTION
+         ========================================== -->
+        <section class="hero">
+            <div class="couple-badge">✨ Ameena &amp; Shoaib · Forever &amp; Always ✨</div>
+            <div class="crown-glow">👑</div>
+            <h1 class="hero-title">My Dearest Shoaib ❤️</h1>
+            <p class="hero-subtitle">
+                The king of my heart, my safe haven, my peace, and the one who makes every single heartbeat sing with
+                happiness.
+            </p>
+
+            <!-- Typing typewriter effect -->
+            <div class="typing-box">
+                <span class="typing-text" id="typingText"></span><span class="typing-cursor">|</span>
+            </div>
+
+            <!-- Quick Interactive Action Buttons -->
+            <div class="hero-actions">
+                <button class="btn-action-pill" onclick="sendVirtualHug()">
+                    <span>🤗</span> Send Shoaib A Virtual Hug &amp; Kiss!
+                </button>
+                <button class="btn-action-pill" onclick="scrollToElement('jarSection')">
+                    <span>💌</span> Read Today's Love Note
+                </button>
+                <button class="btn-action-pill" onclick="scrollToElement('gallerySection')">
+                    <span>📸</span> Our Photo Gallery
+                </button>
+            </div>
+
+            <!-- Nicknames Pills (shonuu, baby, cutu, kuchukuchu, sweetu, shoaib) -->
+            <div class="nickname-container">
+                <div class="nick-pill"
+                    onclick="triggerPillAlert('🧸 Shonuu', 'My sweetest treasure, my comforter, and the one whose soothing voice melts all my worries away!')">
+                    <span>🧸</span> Shonuu
+                </div>
+                <div class="nick-pill"
+                    onclick="triggerPillAlert('🍼 Baby', 'My precious handsome boy, the one I want to cherish and care for through every moment of life!')">
+                    <span>🍼</span> Baby
+                </div>
+                <div class="nick-pill"
+                    onclick="triggerPillAlert('🥰 Cutu', 'That infectious, adorable smile and innocent spark that makes my heart skip a beat every time!')">
+                    <span>🥰</span> Cutu
+                </div>
+                <div class="nick-pill"
+                    onclick="triggerPillAlert('🐾 Kuchukuchu', 'My soft, lovable, playful sweetheart who brings non-stop smiles and joy into my world!')">
+                    <span>🐾</span> Kuchukuchu
+                </div>
+                <div class="nick-pill"
+                    onclick="triggerPillAlert('🍯 Sweetu', 'Sweeter than honey, purer than gold, and the gentlest soul who warms every corner of my soul!')">
+                    <span>🍯</span> Sweetu
+                </div>
+                <div class="nick-pill"
+                    onclick="triggerPillAlert('👑 Shoaib', 'My man, my protector, my lifetime partner, and the greatest blessing Allah has given to Ameena!')">
+                    <span>👑</span> Shoaib
+                </div>
+            </div>
+
+            <!-- Love Counter Card (Since 17th November 2026) -->
+            <div class="counter-glass">
+                <div class="counter-header">
+                    <span>💑</span>
+                    <span>Together In Love Since 17th November 2026</span>
+                    <span>💫</span>
+                </div>
+                <div class="counter-grid">
+                    <div class="counter-box">
+                        <span class="counter-number" id="countDays">0</span>
+                        <span class="counter-label">Days</span>
+                    </div>
+                    <div class="counter-divider">✦</div>
+                    <div class="counter-box">
+                        <span class="counter-number" id="countHours">0</span>
+                        <span class="counter-label">Hours</span>
+                    </div>
+                    <div class="counter-divider">✦</div>
+                    <div class="counter-box">
+                        <span class="counter-number" id="countMinutes">0</span>
+                        <span class="counter-label">Minutes</span>
+                    </div>
+                    <div class="counter-divider">✦</div>
+                    <div class="counter-box">
+                        <span class="counter-number" id="countSeconds">0</span>
+                        <span class="counter-label">Seconds</span>
+                    </div>
+                </div>
+                <div class="counter-extra" id="heartbeatCounter">
+                    Every second since 17th November 2026 is a celebration of us ❤️
+                </div>
+            </div>
+
+            <!-- Scroll hint -->
+            <div class="scroll-arrow-box" onclick="scrollToElement('gallerySection')">
+                <span>EXPLORE OUR MEMORIES</span>
+                <div class="chevron"></div>
+            </div>
+        </section>
+
+
+        <!-- ==========================================
+         2. PHOTO GALLERY (POLAROIDS WITH REAL PHOTOS)
+         ========================================== -->
+        <section class="section-wrap" id="gallerySection">
+            <div class="section-head">
+                <div class="section-subtitle">Moments Frozen In Time</div>
+                <h2 class="section-title">📸 Our Beautiful Memories</h2>
+                <div class="section-ornament">✦ ♡ ✦ ♡ ✦</div>
+            </div>
+
+            <!-- Polaroid Grid -->
+            <div class="gallery-grid" id="galleryGrid">
+                <!-- Built dynamically from JS using (1).jpeg to (8).jpeg -->
+            </div>
+
+            <!-- Add New Photos Button -->
+            <div class="add-memory-box">
+                <input type="file" id="fileInput" accept="image/*" multiple onchange="handleNewImages(event)" />
+                <button class="btn-add-photos" onclick="document.getElementById('fileInput').click()">
+                    <span style="font-size:1.3rem;">📷</span>
+                    <span>Add More Memories Together</span>
+                </button>
+                <p class="add-photos-desc">
+                    ✨ Tap to upload photos from your phone or device! Any photos you add will appear instantly in the
+                    polaroid wall.
+                </p>
+            </div>
+        </section>
+
+
+        <!-- ==========================================
+         3. AMEENA'S JAR OF LOVE NOTES (SPECIAL FEATURE TO MAKE HIM HAPPY)
+         ========================================== -->
+        <section class="section-wrap" id="jarSection">
+            <div class="section-head">
+                <div class="section-subtitle">A Daily Dose of Love Just For You</div>
+                <h2 class="section-title">🍯 Ameena's Jar of Love Notes</h2>
+                <div class="section-ornament">✦ ♡ ✦ ♡ ✦</div>
+            </div>
+
+            <div class="jar-section">
+                <div class="jar-icon-glow">🏺✨</div>
+                <h3 class="jar-title">Pick A Note, My Shoaib!</h3>
+                <p class="jar-sub">
+                    Whenever you need a smile, a reminder of how cherished you are, or just a virtual kiss from Ameena —
+                    tap the button below!
+                </p>
+
+                <div class="jar-note-display" id="jarDisplay">
+                    <p class="jar-note-text" id="jarNoteText">
+                        "You are the most handsome, caring, and loving man in this entire universe. I am blessed to call
+                        you mine, my Shoaib! 💖"
+                    </p>
+                </div>
+
+                <button class="btn-pick-note" onclick="pickRandomLoveNote()">
+                    <span>💌</span> Pick Another Love Note For Shoaib
+                </button>
+            </div>
+        </section>
+
+
+        <!-- ==========================================
+         4. LOVE LETTER FROM AMEENA TO SHOAIB
+         ========================================== -->
+        <section class="section-wrap">
+            <div class="section-head">
+                <div class="section-subtitle">Straight From Ameena's Heart</div>
+                <h2 class="section-title">💌 A Letter To My Shoaib</h2>
+                <div class="section-ornament">✦ ♡ ✦ ♡ ✦</div>
+            </div>
+
+            <div class="letter-container">
+                <div class="letter-seal">❤️</div>
+                <h3 class="letter-salutation">My Dearest Shoaib,</h3>
+
+                <p class="letter-para">
+                    My sweet <strong><span class="tag">Shonuu</span></strong>, my handsome <strong><span
+                            class="tag">Baby</span></strong>, my playful <strong><span
+                            class="tag">Kuchukuchu</span></strong>, my precious <strong><span
+                            class="tag">Cutu</span></strong>, and my sweetest <strong><span
+                            class="tag">Sweetu</span></strong> —
+                    Words will never be enough to describe how deeply, purely, and truly I love you. From the very
+                    moment we met on <strong>17th November 2026</strong>, my entire world changed into something
+                    infinitely brighter and more meaningful.
+                </p>
+
+                <p class="letter-para">
+                    You are not just the man I love; you are my best friend, my protector, my peace in the storm, and
+                    the smile that greets me in my happiest thoughts. Every time I hear your voice or look into your
+                    eyes, my heart whispers: <em>"This is my person. This is where I belong."</em>
+                </p>
+
+                <p class="letter-para">
+                    Thank you for treating me with so much kindness, patience, respect, and unconditional warmth.
+                    Whether you're being your adorable silly self as my <span class="tag">Cutu</span>, comforting me as
+                    my <span class="tag">Shonuu</span>, or standing strong as the king of my heart, <span
+                        class="tag">Shoaib</span> — I fall in love with you all over again, every single day.
+                </p>
+
+                <p class="letter-para">
+                    I promise to love you, support every dream you have, hold your hands through thick and thin, and be
+                    your forever partner. <strong>Ameena is Shoaib's, and Shoaib is Ameena's — always and for all
+                        eternity.</strong>
+                </p>
+
+                <div class="letter-signature">
+                    — Forever &amp; Completely Yours, Ameena 💍
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ==========================================
+         5. NICKNAMES SPOTLIGHT
+         ========================================== -->
+        <section class="section-wrap">
+            <div class="section-head">
+                <div class="section-subtitle">The Many Names of My Heart</div>
+                <h2 class="section-title">🌸 Why Each Nickname Is Special</h2>
+                <div class="section-ornament">✦ ♡ ✦ ♡ ✦</div>
+            </div>
+
+            <div class="nicknames-grid">
+                <div class="nick-card"
+                    onclick="triggerPillAlert('🧸 Shonuu', 'My comfort person, my peace, and the one whose embrace makes the whole world quiet!')">
+                    <div class="nick-card-emoji">🧸</div>
+                    <div>
+                        <h3 class="nick-card-name">Shonuu</h3>
+                        <p class="nick-card-text">
+                            My sweetest treasure and comfort person. Whenever life feels busy or stressful, hearing you
+                            or thinking of you wraps my heart in pure, gentle warmth.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="nick-card"
+                    onclick="triggerPillAlert('🍼 Baby', 'My precious one whom I will always pamper, protect, and love endlessly!')">
+                    <div class="nick-card-emoji">🍼</div>
+                    <div>
+                        <h3 class="nick-card-name">Baby</h3>
+                        <p class="nick-card-text">
+                            My favorite person in the whole universe to pamper and take care of. You have my whole
+                            heart, and I will always cherish you with all my love.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="nick-card"
+                    onclick="triggerPillAlert('🥰 Cutu', 'That cutest smile and sparkle in your eyes that melts my heart every single second!')">
+                    <div class="nick-card-emoji">🥰</div>
+                    <div>
+                        <h3 class="nick-card-name">Cutu</h3>
+                        <p class="nick-card-text">
+                            For that completely irresistible, sweet, and adorable smile you have. The way you look at me
+                            melts all my defenses every single time!
+                        </p>
+                    </div>
+                </div>
+
+                <div class="nick-card"
+                    onclick="triggerPillAlert('🐾 Kuchukuchu', 'My cute little munchkin whose playful laughter brightens my life!')">
+                    <div class="nick-card-emoji">🐾</div>
+                    <div>
+                        <h3 class="nick-card-name">Kuchukuchu</h3>
+                        <p class="nick-card-text">
+                            My playful, cuddly, irreplaceable love. Your little jokes, sweet antics, and cute habits
+                            bring non-stop smiles and sunshine to my soul.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="nick-card"
+                    onclick="triggerPillAlert('🍯 Sweetu', 'Sweeter than all the delights in the world, the gentlest man alive!')">
+                    <div class="nick-card-emoji">🍯</div>
+                    <div>
+                        <h3 class="nick-card-name">Sweetu</h3>
+                        <p class="nick-card-text">
+                            Because your heart is sweeter than honey. The kindness, gentleness, and caring attention you
+                            show me is the rarest gift a girl could ever ask for.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="nick-card"
+                    onclick="triggerPillAlert('👑 Shoaib', 'My king, my husband, my future, and the only man for Ameena!')">
+                    <div class="nick-card-emoji">👑</div>
+                    <div>
+                        <h3 class="nick-card-name">Shoaib</h3>
+                        <p class="nick-card-text">
+                            The real, handsome, strong, and noble king of my life. The one who holds my heart in his
+                            safe hands, and the man I am forever proud to love.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ==========================================
+         6. REASONS WHY AMEENA LOVES SHOAIB
+         ========================================== -->
+        <section class="section-wrap">
+            <div class="section-head">
+                <div class="section-subtitle">Countless Reasons, One Heart</div>
+                <h2 class="section-title">💖 Why Ameena Loves Shoaib</h2>
+                <div class="section-ornament">✦ ♡ ✦ ♡ ✦</div>
+            </div>
+
+            <div class="reasons-grid">
+                <div class="reason-card">
+                    <div class="reason-icon">🛡️</div>
+                    <div class="reason-num">Reason #01</div>
+                    <h4 class="reason-title">How Safe You Make Me Feel</h4>
+                    <p class="reason-desc">In your presence, all fear and anxiety fade away. You are my greatest
+                        sanctuary and protector.</p>
+                </div>
+
+                <div class="reason-card">
+                    <div class="reason-icon">😍</div>
+                    <div class="reason-num">Reason #02</div>
+                    <h4 class="reason-title">Your Handsome Smile</h4>
+                    <p class="reason-desc">One look at your smile brightens my entire day. You are the most handsome man
+                        I have ever seen.</p>
+                </div>
+
+                <div class="reason-card">
+                    <div class="reason-icon">🌙</div>
+                    <div class="reason-num">Reason #03</div>
+                    <h4 class="reason-title">Our Midnight Conversations</h4>
+                    <p class="reason-desc">Sharing our secrets, laughing about our silliness, and planning our beautiful
+                        future together under the moon.</p>
+                </div>
+
+                <div class="reason-card">
+                    <div class="reason-icon">🤲</div>
+                    <div class="reason-num">Reason #04</div>
+                    <h4 class="reason-title">Your Pure &amp; Generous Heart</h4>
+                    <p class="reason-desc">The genuine kindness, respect, and loyalty you have in your heart makes me
+                        fall in love with your soul.</p>
+                </div>
+
+                <div class="reason-card">
+                    <div class="reason-icon">💪</div>
+                    <div class="reason-num">Reason #05</div>
+                    <h4 class="reason-title">Your Ambition &amp; Hard Work</h4>
+                    <p class="reason-desc">I admire how dedicated, strong, and hard-working you are. I will always cheer
+                        for you and your success!</p>
+                </div>
+
+                <div class="reason-card">
+                    <div class="reason-icon">🧸</div>
+                    <div class="reason-num">Reason #06</div>
+                    <h4 class="reason-title">Your Cuteness (My Shonuu!)</h4>
+                    <p class="reason-desc">The cute little things you say, the way you pout, and your sweetness when you
+                        talk to me.</p>
+                </div>
+
+                <div class="reason-card">
+                    <div class="reason-icon">💎</div>
+                    <div class="reason-num">Reason #07</div>
+                    <h4 class="reason-title">Unbreakable Loyalty</h4>
+                    <p class="reason-desc">Knowing that you choose me, respect me, and value me as your queen is the
+                        greatest honor of my life.</p>
+                </div>
+
+                <div class="reason-card">
+                    <div class="reason-icon">✨</div>
+                    <div class="reason-num">Reason #08</div>
+                    <h4 class="reason-title">You Make Me A Better Person</h4>
+                    <p class="reason-desc">Your love inspires me, brings out my best smiles, and gives me endless
+                        reasons to be happy every day.</p>
+                </div>
+
+                <div class="reason-card">
+                    <div class="reason-icon">♾️</div>
+                    <div class="reason-num">Reason #∞</div>
+                    <h4 class="reason-title">Because You Are My Destiny</h4>
+                    <p class="reason-desc">Out of the entire world, my soul chose you on 17th November 2026, and I will
+                        choose you for all eternity.</p>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ==========================================
+         7. LOVE METER SECTION
+         ========================================== -->
+        <section class="section-wrap">
+            <div class="section-head">
+                <div class="section-subtitle">Measuring The Immeasurable</div>
+                <h2 class="section-title">📊 Ameena &amp; Shoaib Love Meter</h2>
+                <div class="section-ornament">✦ ♡ ✦ ♡ ✦</div>
+            </div>
+
+            <div class="meter-box">
+                <div class="meter-row">
+                    <div class="meter-info">
+                        <span class="meter-info-label">💖 Ameena's Depth of Love For Shoaib</span>
+                        <span class="meter-info-val">Infinite %</span>
+                    </div>
+                    <div class="meter-bar-track">
+                        <div class="meter-bar-fill" style="width: 100%;"></div>
+                    </div>
+                </div>
+
+                <div class="meter-row">
+                    <div class="meter-info">
+                        <span class="meter-info-label">😍 How Handsome &amp; Charming Shoaib Is</span>
+                        <span class="meter-info-val">1000 % (Unmatched)</span>
+                    </div>
+                    <div class="meter-bar-track">
+                        <div class="meter-bar-fill" style="width: 100%;"></div>
+                    </div>
+                </div>
+
+                <div class="meter-row">
+                    <div class="meter-info">
+                        <span class="meter-info-label">🥺 How Much Ameena Misses Shoaib When Apart</span>
+                        <span class="meter-info-val">100 % Every Second</span>
+                    </div>
+                    <div class="meter-bar-track">
+                        <div class="meter-bar-fill" style="width: 99%;"></div>
+                    </div>
+                </div>
+
+                <div class="meter-row">
+                    <div class="meter-info">
+                        <span class="meter-info-label">🌸 Sweetness Level (Shonuu + Cutu + Sweetu)</span>
+                        <span class="meter-info-val">Off The Charts</span>
+                    </div>
+                    <div class="meter-bar-track">
+                        <div class="meter-bar-fill" style="width: 98%;"></div>
+                    </div>
+                </div>
+
+                <div class="meter-row">
+                    <div class="meter-info">
+                        <span class="meter-info-label">💍 Lifetime Commitment &amp; Loyalty</span>
+                        <span class="meter-info-val">100 % Forever &amp; Always</span>
+                    </div>
+                    <div class="meter-bar-track">
+                        <div class="meter-bar-fill" style="width: 100%;"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ==========================================
+         8. AMEENA'S SACRED PROMISES TO SHOAIB
+         ========================================== -->
+        <section class="section-wrap">
+            <div class="section-head">
+                <div class="section-subtitle">Vows Written In My Heart</div>
+                <h2 class="section-title">🤝 Sacred Promises To Shoaib</h2>
+                <div class="section-ornament">✦ ♡ ✦ ♡ ✦</div>
+            </div>
+
+            <div class="promises-grid">
+                <div class="promise-card">
+                    <div class="promise-icon">🛡️</div>
+                    <div class="promise-text">
+                        I promise to always be your peace, your haven, and the home you can always return to after a
+                        long day.
+                    </div>
+                </div>
+
+                <div class="promise-card">
+                    <div class="promise-icon">🤗</div>
+                    <div class="promise-text">
+                        I promise to listen to you, understand your feelings, and never let you face this world alone.
+                    </div>
+                </div>
+
+                <div class="promise-card">
+                    <div class="promise-icon">🚀</div>
+                    <div class="promise-text">
+                        I promise to believe in you, stand behind your ambitions, and celebrate every single victory
+                        with you.
+                    </div>
+                </div>
+
+                <div class="promise-card">
+                    <div class="promise-icon">😂</div>
+                    <div class="promise-text">
+                        I promise to make you laugh, tease you lovingly, and bring genuine smiles to your face every
+                        single day.
+                    </div>
+                </div>
+
+                <div class="promise-card">
+                    <div class="promise-icon">🌹</div>
+                    <div class="promise-text">
+                        I promise to cherish, respect, and appreciate you just as passionately 50 years from now as
+                        today.
+                    </div>
+                </div>
+
+                <div class="promise-card">
+                    <div class="promise-icon">💍</div>
+                    <div class="promise-text">
+                        I promise that my heart, my loyalty, and my soul belong solely to you, Shoaib, for all of
+                        eternity.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ==========================================
+         9. OUR STORY TIMELINE (SINCE 17TH NOV 2026)
+         ========================================== -->
+        <section class="section-wrap">
+            <div class="section-head">
+                <div class="section-subtitle">The Journey of Ameena &amp; Shoaib</div>
+                <h2 class="section-title">🕰️ Our Love Story</h2>
+                <div class="section-ornament">✦ ♡ ✦ ♡ ✦</div>
+            </div>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-card">
+                        <div class="timeline-date">17th November 2026 💫</div>
+                        <h4 class="timeline-title">The Day We Met</h4>
+                        <p class="timeline-desc">The magical, unforgettable day our paths crossed. It was the moment
+                            written in the stars for Ameena &amp; Shoaib.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-card">
+                        <div class="timeline-date">The Nicknames Era 🧸🍯</div>
+                        <h4 class="timeline-title">Shonuu &amp; Sweetu</h4>
+                        <p class="timeline-desc">When sweet little nicknames like Shonuu, Baby, Cutu, Kuchukuchu, and
+                            Sweetu became our very own love language.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-card">
+                        <div class="timeline-date">Midnight Conversations 🌙</div>
+                        <h4 class="timeline-title">Heart to Heart</h4>
+                        <p class="timeline-desc">Hours melting away in seconds. Talking about life, sharing our dreams,
+                            and realizing how deeply we connect.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-card">
+                        <div class="timeline-date">Every Single Day 💖</div>
+                        <h4 class="timeline-title">Growing Closer &amp; Stronger</h4>
+                        <p class="timeline-desc">Each sunrise proves that you are the most precious gift. Every day with
+                            you is a blessing.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-card">
+                        <div class="timeline-date">Our Forever Future ♾️</div>
+                        <h4 class="timeline-title">Ameena &amp; Shoaib Forever</h4>
+                        <p class="timeline-desc">Walking hand in hand through every adventure, building our dream life,
+                            and loving each other to infinity.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ==========================================
+         10. SURPRISE REVEAL SECTION
+         ========================================== -->
+        <section class="surprise-section">
+            <button class="btn-surprise" onclick="triggerGrandSurprise()">
+                <span>💝</span> Press Me For A Special Surprise, Shoaib! <span>🎉</span>
+            </button>
+
+            <div class="surprise-popup" id="surprisePopup">
+                <h3 class="surprise-popup-title">🌟 You Are Ameena's Greatest Blessing 🌟</h3>
+                <p class="surprise-popup-text">
+                    My dearest <strong>Shoaib</strong> — thank you for walking into my life on <strong>17th November
+                        2026</strong>.<br />
+                    Thank you for your warmth, your pure love, your protective care, and for giving my heart a safe
+                    home.<br />
+                    <strong style="color:var(--gold);">I love you more than all the stars in the midnight
+                        sky!</strong><br />
+                    Forever Ameena's Shonuu, Baby, Cutu, Kuchukuchu, and Sweetu 👑💖💍
+                </p>
+                <div class="surprise-emojis">
+                    🎉 💖 🌸 🍯 🧸 🐾 👑 💫 💍 🥳 🎊
+                </div>
+            </div>
+        </section>
+
+    </div> <!-- End main-wrapper -->
+
+    <!-- ==========================================
+       11. FOOTER
+       ========================================== -->
+    <footer>
+        <span class="footer-heart">❤️</span>
+        <div class="footer-text">
+            Crafted with endless love by Ameena for her Shoaib 🌸
+        </div>
+        <div class="footer-sub">
+            Shonuu · Baby · Cutu · Kuchukuchu · Sweetu · Shoaib · Since 17.11.2026 · To Infinity &amp; Beyond ♾️
+        </div>
+    </footer>
+
+
+    <!-- ========================================================
+       12. JAVASCRIPT LOGIC (ROBUST, FAST, FULLY MOBILE OPTIMIZED)
+       ======================================================== -->
+    <script>
+        /* ===================================================
+           1. PHOTOS & GALLERY INITIALIZATION
+           =================================================== */
+        // Real photos provided by user in the folder
+        var defaultPhotos = [
+            { src: "(1).jpeg", cap: "🥰 My Handsome Shoaib — Stole My Heart" },
+            { src: "(2).jpeg", cap: "💖 Cutest Moments With My Baby" },
+            { src: "(3).jpeg", cap: "✨ My Whole World in One Person · Shonuu" },
+            { src: "(4).jpeg", cap: "🌸 Every Second With You Is Magic · Sweetu" },
+            { src: "(5).jpeg", cap: "👑 The King of My Heart · Shoaib" },
+            { src: "(6).jpeg", cap: "🐾 Unconditional Love & Cuteness · Kuchukuchu" },
+            { src: "(7).jpeg", cap: "💍 My Forever & Always · Cutu" },
+            { src: "(8).jpeg", cap: "🌙 Together Under Every Star · Ameena & Shoaib" }
+        ];
+
+        // Load any extra user added photos from localStorage
+        var savedCustomPhotos = [];
+        try {
+            var stored = localStorage.getItem('ameena_shoaib_extra_photos');
+            if (stored) {
+                savedCustomPhotos = JSON.parse(stored);
+            }
+        } catch (e) {
+            console.log('LocalStorage note:', e);
+        }
+
+        var allPhotos = defaultPhotos.concat(savedCustomPhotos);
+        var currentLightboxIndex = 0;
+        var polaroidRotations = [-2.5, 2.2, -1.8, 2.8, -2, 2.5, -3, 1.8, -2.2, 3];
+
+        /* Render Gallery Polaroids */
+        function renderGallery() {
+            var grid = document.getElementById('galleryGrid');
+            if (!grid) return;
+            grid.innerHTML = '';
+
+            allPhotos.forEach(function (item, idx) {
+                var rot = polaroidRotations[idx % polaroidRotations.length];
+                var card = document.createElement('div');
+                card.className = 'polaroid-card';
+                card.style.setProperty('--rotate-deg', rot + 'deg');
+                card.onclick = function () { openLightbox(idx); };
+
+                var fallbackSvg = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300' viewBox='0 0 300 300'%3E%3Crect width='300' height='300' fill='%232a1838'/%3E%3Ctext x='50%25' y='50%25' font-family='sans-serif' font-size='16' fill='%23ff758f' text-anchor='middle'%3E💖 " + encodeURIComponent(item.cap) + "%3C/text%3E%3C/svg%3E";
+
+                card.innerHTML =
+                    '<div class="polaroid-img-wrapper">' +
+                    '<img src="' + item.src + '" alt="' + item.cap + '" onerror="if(this.src.indexOf(\'(8(.jpeg\')===-1 && this.src.indexOf(\'(8).jpeg\')!==-1){this.src=\'(8(.jpeg\';}else{this.onerror=null;this.src=\'' + fallbackSvg + '\';}">' +
+                    '</div>' +
+                    '<div class="polaroid-heart">❤️</div>' +
+                    '<div class="polaroid-caption">' + item.cap + '</div>';
+
+                grid.appendChild(card);
+            });
+        }
+
+        /* Add new images from phone / device */
+        function handleNewImages(evt) {
+            var files = evt.target.files;
+            if (!files || !files.length) return;
+
+            Array.from(files).forEach(function (file) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    var cleanName = file.name.replace(/\.[^/.]+$/, "");
+                    var newPhoto = {
+                        src: e.target.result,
+                        cap: "💖 " + cleanName
+                    };
+                    allPhotos.push(newPhoto);
+                    savedCustomPhotos.push(newPhoto);
+
+                    try {
+                        localStorage.setItem('ameena_shoaib_extra_photos', JSON.stringify(savedCustomPhotos));
+                    } catch (err) {
+                        console.log('Storage quota note:', err);
+                    }
+
+                    renderGallery();
+                };
+                reader.readAsDataURL(file);
+            });
+
+            evt.target.value = '';
+            launchMiniConfetti();
+            alert('🎉 New memory added to our photo wall! Scroll through to enjoy!');
+        }
+
+        /* Lightbox functionality */
+        function openLightbox(index) {
+            currentLightboxIndex = index;
+            var modal = document.getElementById('lightboxModal');
+            var img = document.getElementById('lightboxImg');
+            var cap = document.getElementById('lightboxCaption');
+            if (!modal || !img) return;
+
+            var current = allPhotos[index];
+            img.src = current.src;
+            cap.textContent = current.cap;
+            modal.classList.add('active');
+        }
+
+        function closeLightbox() {
+            var modal = document.getElementById('lightboxModal');
+            if (modal) modal.classList.remove('active');
+        }
+
+        function changeLightboxPhoto(direction) {
+            currentLightboxIndex = (currentLightboxIndex + direction + allPhotos.length) % allPhotos.length;
+            openLightbox(currentLightboxIndex);
+        }
+
+        // Keyboard support for Lightbox
+        document.addEventListener('keydown', function (e) {
+            var modal = document.getElementById('lightboxModal');
+            if (!modal || !modal.classList.contains('active')) return;
+            if (e.key === 'Escape') closeLightbox();
+            if (e.key === 'ArrowLeft') changeLightboxPhoto(-1);
+            if (e.key === 'ArrowRight') changeLightboxPhoto(1);
+        });
+
+        // Touch Swipe support for Lightbox on mobile
+        var touchStartX = 0;
+        var touchEndX = 0;
+        var lightboxModal = document.getElementById('lightboxModal');
+        if (lightboxModal) {
+            lightboxModal.addEventListener('touchstart', function (e) {
+                touchStartX = e.changedTouches[0].screenX;
+            }, { passive: true });
+            lightboxModal.addEventListener('touchend', function (e) {
+                touchEndX = e.changedTouches[0].screenX;
+                var diff = touchEndX - touchStartX;
+                if (Math.abs(diff) > 45) {
+                    if (diff > 0) changeLightboxPhoto(-1);
+                    else changeLightboxPhoto(1);
+                }
+            }, { passive: true });
+        }
+
+        /* ===================================================
+           2. RELATIONSHIP COUNTER (MET ON 17TH NOVEMBER 2026)
+           =================================================== */
+        // 17th November 2026 (Month is 0-indexed in JS, so 10 is November)
+        var startDate = new Date(2026, 10, 17, 0, 0, 0);
+
+        function updateLoveCounter() {
+            var now = new Date();
+            var diffMs = Math.max(0, now - startDate);
+            var totalSecs = Math.floor(diffMs / 1000);
+
+            var days = Math.floor(totalSecs / 86400);
+            var hours = Math.floor((totalSecs % 86400) / 3600);
+            var minutes = Math.floor((totalSecs % 3600) / 60);
+            var seconds = totalSecs % 60;
+
+            var elDays = document.getElementById('countDays');
+            var elHours = document.getElementById('countHours');
+            var elMins = document.getElementById('countMinutes');
+            var elSecs = document.getElementById('countSeconds');
+
+            if (elDays) elDays.textContent = days;
+            if (elHours) elHours.textContent = hours;
+            if (elMins) elMins.textContent = String(minutes).padStart(2, '0');
+            if (elSecs) elSecs.textContent = String(seconds).padStart(2, '0');
+
+            var elHeartbeats = document.getElementById('heartbeatCounter');
+            if (elHeartbeats) {
+                var heartbeats = Math.floor(totalSecs * 1.25);
+                elHeartbeats.textContent = 'Over ' + heartbeats.toLocaleString() + ' heartbeats of Ameena loving only Shoaib ❤️';
+            }
+        }
+
+        /* ===================================================
+           3. TYPEWRITER EFFECT
+           =================================================== */
+        var romanticPhrases = [
+            "Every single love song makes me think of you, Shoaib…",
+            "My sweet Shonuu, my dearest Baby 🧸🍼",
+            "My adorable Cutu, my precious Kuchukuchu 🥰🐾",
+            "My sweet Sweetu — the peace in my entire world 🍯✨",
+            "Together since 17th November 2026, and forever to go ♾️",
+            "Ameena is blessed to have Shoaib in her life 💖"
+        ];
+
+        var phraseIndex = 0;
+        var charIndex = 0;
+        var isDeleting = false;
+
+        function typewriterTick() {
+            var el = document.getElementById('typingText');
+            if (!el) return;
+
+            var currentPhrase = romanticPhrases[phraseIndex];
+            if (!isDeleting) {
+                el.textContent = currentPhrase.slice(0, ++charIndex);
+                if (charIndex === currentPhrase.length) {
+                    isDeleting = true;
+                    setTimeout(typewriterTick, 2300);
+                    return;
+                }
+            } else {
+                el.textContent = currentPhrase.slice(0, --charIndex);
+                if (charIndex === 0) {
+                    isDeleting = false;
+                    phraseIndex = (phraseIndex + 1) % romanticPhrases.length;
+                }
+            }
+            setTimeout(typewriterTick, isDeleting ? 38 : 65);
+        }
+
+        /* ===================================================
+           4. MUSIC PLAYER SYSTEM (RISHTE NAATE)
+           =================================================== */
+        var audio = document.getElementById('loveSong');
+        var disc = document.getElementById('discRecord');
+        var playPauseBtn = document.getElementById('btnPlayPause');
+        var eq = document.getElementById('equalizerWave');
+        var banner = document.getElementById('musicBanner');
+        var volSlider = document.getElementById('volSlider');
+
+        if (audio) {
+            audio.volume = 0.85;
+        }
+
+        function togglePlayMusic() {
+            if (!audio) return;
+
+            if (audio.paused) {
+                audio.play().then(function () {
+                    updateMusicUI(true);
+                }).catch(function (err) {
+                    console.log('Audio playback info:', err);
+                });
+            } else {
+                audio.pause();
+                updateMusicUI(false);
+            }
+        }
+
+        function updateMusicUI(isPlaying) {
+            if (disc) disc.classList.toggle('spinning', isPlaying);
+            if (eq) eq.classList.toggle('active', isPlaying);
+            if (playPauseBtn) playPauseBtn.textContent = isPlaying ? '⏸' : '▶';
+            if (banner && isPlaying) banner.classList.add('hidden');
+        }
+
+        if (volSlider && audio) {
+            volSlider.addEventListener('input', function () {
+                audio.volume = parseFloat(volSlider.value);
+            });
+        }
+
+        // Auto-start music on first tap or click anywhere on page
+        function autoPlayOnFirstTouch() {
+            if (audio && audio.paused) {
+                audio.play().then(function () {
+                    updateMusicUI(true);
+                }).catch(function () { });
+            }
+            document.removeEventListener('click', autoPlayOnFirstTouch);
+            document.removeEventListener('touchstart', autoPlayOnFirstTouch);
+        }
+        document.addEventListener('click', autoPlayOnFirstTouch, { once: true });
+        document.addEventListener('touchstart', autoPlayOnFirstTouch, { once: true });
+
+        /* ===================================================
+           5. AMEENA'S JAR OF LOVE NOTES FOR SHOAIB
+           =================================================== */
+        var jarNotes = [
+            "You are the most handsome, caring, and loving man in this entire universe. I am blessed to call you mine, my Shoaib! 💖",
+            "Whenever life feels tiring, remember that you have Ameena waiting to give you the warmest, longest hug in the world! 🤗",
+            "Your smile is my favorite thing on planet Earth. Keep smiling, my handsome Shonuu! 🥰",
+            "Thank you for being my protector, my best friend, and my peace. You mean the whole world to me, Baby! 👑",
+            "I promise to always cook your favorite food, listen to your stories, and cheer for every single one of your dreams! 🍯",
+            "No matter what happens in this world, it will always be Ameena & Shoaib against the odds! Hand in hand forever! 💍",
+            "You make me feel so safe and cherished. Loving you is the easiest and most natural thing my heart has ever done! 🌸",
+            "My cute Kuchukuchu, seeing you happy makes my entire day 1000 times brighter! 🐾",
+            "17th November 2026 was the day my life truly began because Allah brought you to me! ✨",
+            "You are my king, my future, and the only one for me. I love you to the moon and back, Shoaib! 💖"
+        ];
+
+        var lastNoteIdx = 0;
+        function pickRandomLoveNote() {
+            var newIdx = Math.floor(Math.random() * jarNotes.length);
+            if (newIdx === lastNoteIdx) {
+                newIdx = (newIdx + 1) % jarNotes.length;
+            }
+            lastNoteIdx = newIdx;
+
+            var display = document.getElementById('jarDisplay');
+            var noteText = document.getElementById('jarNoteText');
+            if (!noteText) return;
+
+            if (display) {
+                display.style.transform = 'scale(0.95)';
+                display.style.opacity = '0.5';
+            }
+
+            setTimeout(function () {
+                noteText.textContent = '"' + jarNotes[newIdx] + '"';
+                if (display) {
+                    display.style.transform = 'scale(1)';
+                    display.style.opacity = '1';
+                }
+            }, 180);
+
+            launchMiniConfetti();
+            playSynthesizedChime();
+        }
+
+        /* ===================================================
+           6. INTERACTIVE VIRTUAL HUG & KISS
+           =================================================== */
+        function sendVirtualHug() {
+            var items = ['💋', '🤗', '💖', '🌸', '✨', '💕', '🥰', '🧸'];
+            for (var i = 0; i < 30; i++) {
+                (function (idx) {
+                    setTimeout(function () {
+                        createFallingPetal(items[Math.floor(Math.random() * items.length)]);
+                    }, idx * 40);
+                })(i);
+            }
+            playSynthesizedChime();
+            alert('💋🤗 Ameena sends Shoaib a million virtual hugs, kisses, and infinite love!');
+        }
+
+        /* Nickname alert popup with mini sparkles */
+        function triggerPillAlert(title, message) {
+            launchMiniConfetti();
+            alert(title + ':\n"' + message + '"');
+        }
+
+        /* ===================================================
+           7. GRAND SURPRISE & AUDIO CHIME
+           =================================================== */
+        function triggerGrandSurprise() {
+            var popup = document.getElementById('surprisePopup');
+            if (popup) {
+                popup.classList.add('open');
+                popup.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+            launchGrandConfetti();
+            playSynthesizedChime();
+        }
+
+        function playSynthesizedChime() {
+            try {
+                var AudioContext = window.AudioContext || window.webkitAudioContext;
+                if (!AudioContext) return;
+                var ctx = new AudioContext();
+                var notes = [523.25, 659.25, 783.99, 1046.50]; // C5, E5, G5, C6
+                notes.forEach(function (freq, i) {
+                    var osc = ctx.createOscillator();
+                    var gain = ctx.createGain();
+                    osc.type = 'triangle';
+                    osc.frequency.value = freq;
+                    gain.gain.setValueAtTime(0.08, ctx.currentTime + i * 0.12);
+                    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + i * 0.12 + 0.8);
+                    osc.connect(gain);
+                    gain.connect(ctx.destination);
+                    osc.start(ctx.currentTime + i * 0.12);
+                    osc.stop(ctx.currentTime + i * 0.12 + 0.9);
+                });
+            } catch (e) { }
+        }
+
+        function launchGrandConfetti() {
+            var items = ['🌸', '💖', '✨', '🎉', '💫', '❤️', '🌟', '🎊', '🍯', '🧸', '👑', '💍', '💋'];
+            for (var i = 0; i < 75; i++) {
+                (function (idx) {
+                    setTimeout(function () {
+                        createFallingPetal(items[Math.floor(Math.random() * items.length)]);
+                    }, idx * 40);
+                })(i);
+            }
+        }
+
+        function launchMiniConfetti() {
+            var items = ['💖', '🌸', '✨', '🍯', '🧸'];
+            for (var i = 0; i < 16; i++) {
+                createFallingPetal(items[Math.floor(Math.random() * items.length)]);
+            }
+        }
+
+        function createFallingPetal(symbol) {
+            var el = document.createElement('div');
+            el.textContent = symbol;
+            el.style.position = 'fixed';
+            el.style.top = '-20px';
+            el.style.left = (Math.random() * 95) + 'vw';
+            el.style.fontSize = (Math.random() * 1.3 + 0.9) + 'rem';
+            el.style.zIndex = '99999';
+            el.style.pointerEvents = 'none';
+            el.style.transition = 'transform 4.5s linear, opacity 4.5s ease-out';
+            document.body.appendChild(el);
+
+            requestAnimationFrame(function () {
+                var xDrift = (Math.random() - 0.5) * 160;
+                el.style.transform = 'translate(' + xDrift + 'px, 105vh) rotate(' + (Math.random() * 720) + 'deg)';
+                el.style.opacity = '0';
+            });
+
+            setTimeout(function () {
+                el.remove();
+            }, 4800);
+        }
+
+        /* ===================================================
+           8. BACKGROUND CANVAS STARS & FLOATING HEARTS
+           =================================================== */
+        function initCanvasStars() {
+            var canvas = document.getElementById('starsCanvas');
+            if (!canvas) return;
+            var ctx = canvas.getContext('2d');
+            var stars = [];
+
+            function setCanvasSize() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+                stars = [];
+                var count = window.innerWidth < 768 ? 60 : 120;
+                for (var i = 0; i < count; i++) {
+                    stars.push({
+                        x: Math.random() * canvas.width,
+                        y: Math.random() * canvas.height,
+                        radius: Math.random() * 1.5 + 0.4,
+                        alpha: Math.random(),
+                        speed: Math.random() * 0.012 + 0.004,
+                        dir: Math.random() > 0.5 ? 1 : -1
+                    });
+                }
+            }
+
+            setCanvasSize();
+            window.addEventListener('resize', setCanvasSize);
+
+            function renderStars() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                stars.forEach(function (s) {
+                    s.alpha += s.speed * s.dir;
+                    if (s.alpha > 1 || s.alpha < 0.1) s.dir *= -1;
+                    ctx.beginPath();
+                    ctx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
+                    ctx.fillStyle = 'rgba(255, 230, 255, ' + s.alpha + ')';
+                    ctx.fill();
+                });
+                requestAnimationFrame(renderStars);
+            }
+            renderStars();
+        }
+
+        function initFloatingBackgroundItems() {
+            var container = document.getElementById('floatingContainer');
+            if (!container) return;
+            var symbols = ['❤️', '💖', '💕', '🌸', '✨', '💫', '🍯', '🧸', '👑'];
+            var count = window.innerWidth < 768 ? 12 : 22;
+
+            for (var i = 0; i < count; i++) {
+                var item = document.createElement('div');
+                item.className = 'float-item';
+                item.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+                item.style.left = Math.random() * 95 + 'vw';
+                item.style.animationDuration = (Math.random() * 12 + 10) + 's';
+                item.style.animationDelay = (Math.random() * 12) + 's';
+                item.style.fontSize = (Math.random() * 1.2 + 0.8) + 'rem';
+                container.appendChild(item);
+            }
+        }
+
+        /* Sparkle cursor & touch trail */
+        function addSparkle(x, y) {
+            var spark = document.createElement('div');
+            spark.className = 'sparkle-trail';
+            spark.textContent = ['✨', '💖', '🌸', '⭐', '🧸'][Math.floor(Math.random() * 5)];
+            spark.style.left = x + 'px';
+            spark.style.top = y + 'px';
+            document.body.appendChild(spark);
+            setTimeout(function () { spark.remove(); }, 750);
+        }
+
+        document.addEventListener('mousemove', function (e) {
+            if (Math.random() > 0.82) {
+                addSparkle(e.clientX, e.clientY);
+            }
+        });
+
+        document.addEventListener('touchmove', function (e) {
+            if (Math.random() > 0.75 && e.touches[0]) {
+                addSparkle(e.touches[0].clientX, e.touches[0].clientY);
+            }
+        }, { passive: true });
+
+        function scrollToElement(id) {
+            var el = document.getElementById(id);
+            if (el) el.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        /* ===================================================
+           9. INITIALIZATION ON DOM READY
+           =================================================== */
+        window.addEventListener('DOMContentLoaded', function () {
+            renderGallery();
+            updateLoveCounter();
+            setInterval(updateLoveCounter, 1000);
+            typewriterTick();
+            initCanvasStars();
+            initFloatingBackgroundItems();
+        });
+    </script>
+</body>
+
+</html>
